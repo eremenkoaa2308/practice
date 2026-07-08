@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const pathNames = {
   '/': 'Главная',
-  '/dictionary': 'Справочник о работниках',
+  '/dictionary': 'Справочник работников',
   '/about': 'О Компании',
   '/security': 'Безопасность',
   '/settings': 'Настройки',
