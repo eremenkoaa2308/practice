@@ -15,7 +15,6 @@ import Button from '@mui/material/Button';
 import PageTitle from '../../components/PageTitle';
 import BreadcrumbsNav from '../../components/Breadcrumbs';
 
-// Маленькая подпись над группой полей (как "Тип" и "Специальность" на макете).
 const SectionLabel = ({ children }) => (
   <Typography variant="body2" sx={styles.label}>
     {children}
@@ -24,7 +23,6 @@ const SectionLabel = ({ children }) => (
 
 const cities = ['Москва', 'Санкт-Петербург', 'Новосибирск', 'Екатеринбург'];
 
-// Все стили страницы в одном месте, чтобы разметка оставалась чистой.
 const styles = {
   page: { pb: 6, textAlign: 'left' },
   tabsBar: { borderBottom: 1, borderColor: 'divider', mt: 2 },
@@ -41,8 +39,8 @@ const styles = {
     gap: 2,
   },
   label: { color: 'text.secondary', mb: 0.5 },
-  field: { bgcolor: '#fff', borderRadius: 1 },
-  select: { bgcolor: '#fff' },
+  field: { bgcolor: 'background.paper', borderRadius: 1 },
+  select: { bgcolor: 'background.paper' },
   placeholder: { color: '#9e9e9e' },
   submitButton: {
     bgcolor: 'accent.main',
@@ -53,14 +51,12 @@ const styles = {
 };
 
 const Security = () => {
-  // Состояние формы. Всё контролируемое, чтобы поля реально работали.
-  const [tab, setTab] = useState(0); // активная вкладка
-  const [name, setName] = useState(''); // поле "Имя"
-  const [city, setCity] = useState(''); // выбранный город
-  const [types, setTypes] = useState({ infra: true, dev: true, spec: false }); // чекбоксы "Тип"
-  const [speciality, setSpeciality] = useState('programmer'); // радио "Специальность"
+  const [tab, setTab] = useState(0);
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [types, setTypes] = useState({ infra: true, dev: true, spec: false });
+  const [speciality, setSpeciality] = useState('programmer');
 
-  // Переключение чекбоксов "Тип" по имени.
   const handleType = (name) => (event) => {
     setTypes((prev) => ({ ...prev, [name]: event.target.checked }));
   };
@@ -70,8 +66,6 @@ const Security = () => {
       <PageTitle>Безопасность</PageTitle>
 
       <BreadcrumbsNav />
-
-      {/* Вкладки. Нижняя линия тянется на всю ширину, поэтому она на обёртке. */}
       <Box sx={styles.tabsBar}>
         <Tabs value={tab} onChange={(event, value) => setTab(value)} sx={styles.tabs}>
           <Tab label="Регистрация инцидента" />
@@ -80,10 +74,8 @@ const Security = () => {
         </Tabs>
       </Box>
 
-      {/* Вкладка "Регистрация инцидента" — единственная заполненная. */}
       {tab === 0 && (
         <Box sx={styles.panel}>
-          {/* Имя */}
           <TextField
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -92,13 +84,11 @@ const Security = () => {
             sx={styles.field}
           />
 
-          {/* Город */}
           <Select
             value={city}
             onChange={(event) => setCity(event.target.value)}
             displayEmpty
             fullWidth
-            // Пока город не выбран, показываем серую подсказку "Город".
             renderValue={(selected) =>
               selected || <span style={styles.placeholder}>Город</span>
             }
@@ -111,7 +101,6 @@ const Security = () => {
             ))}
           </Select>
 
-          {/* Тип */}
           <Box>
             <SectionLabel>Тип</SectionLabel>
             <FormGroup>
@@ -130,7 +119,6 @@ const Security = () => {
             </FormGroup>
           </Box>
 
-          {/* Специальность */}
           <Box>
             <SectionLabel>Специальность</SectionLabel>
             <RadioGroup value={speciality} onChange={(event) => setSpeciality(event.target.value)}>
@@ -139,8 +127,6 @@ const Security = () => {
               <FormControlLabel value="specialist" control={<Radio />} label="Специалист" />
             </RadioGroup>
           </Box>
-
-          {/* Кнопка "Отправить" на всю ширину. */}
           <Button variant="contained" fullWidth sx={styles.submitButton}>
             Отправить
           </Button>

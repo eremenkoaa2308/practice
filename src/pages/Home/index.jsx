@@ -12,14 +12,12 @@ import pipelineImg from '../../assets/1.jpg';
 const description =
   'В частности, экономическая повестка сегодняшнего дня предопределяет высокую востребованность стандартных подходов. Как принято считать, стремящиеся вытеснить традиционное производство, нанотехнологии, инициированные исключительно синтетически, функционально разнесены на независимые элементы.';
 
-// Пока карточки одинаковые — повторяем одну заготовку несколько раз.
 const cards = Array.from({ length: 6 }, (_, index) => ({
   id: index,
   title: 'Трубопровод',
   description,
 }));
 
-// Все стили страницы в одном месте, чтобы разметка оставалась чистой.
 const styles = {
   page: { pb: 6, textAlign: 'left' },
   grid: {
@@ -30,7 +28,7 @@ const styles = {
     gap: 3,
   },
   card: { bgcolor: 'panel.main', borderRadius: 2, boxShadow: '0 1px 3px rgba(0,0,0,0.08)' },
-  cardTitle: { fontWeight: 700, color: '#1f2d3d', mb: 1 },
+  cardTitle: { fontWeight: 700, color: 'text.primary', mb: 1 },
   cardText: { color: 'text.secondary' },
   actions: { px: 2, pb: 2 },
   actionButton: { color: 'primary.main' },
@@ -42,8 +40,6 @@ const Home = () => {
       <PageTitle>Справочник работников</PageTitle>
 
       <BreadcrumbsNav />
-
-      {/* Сетка карточек: 1 колонка на телефоне, 2 на планшете, 3 на десктопе. */}
       <Box sx={styles.grid}>
         {cards.map((card) => (
           <Card key={card.id} elevation={0} sx={styles.card}>

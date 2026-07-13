@@ -5,9 +5,16 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import { Link } from 'react-router-dom';
+import { useColorMode } from '../../ColorModeProvider';
 
 function NavBar() {
+  const { mode, toggleColorMode } = useColorMode();
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -39,6 +46,13 @@ function NavBar() {
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, ml: 'auto' }}>
+          {/* Переключатель светлой/тёмной темы. */}
+          <Tooltip title={mode === 'light' ? 'Тёмная тема' : 'Светлая тема'}>
+            <IconButton color="inherit" onClick={toggleColorMode} aria-label="Переключить тему">
+              {mode === 'light' ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
+            </IconButton>
+          </Tooltip>
+
           <Box sx={{ textAlign: 'right' }}>
             <Typography variant="body2" sx={{ fontWeight: 500, lineHeight: 1.2 }}>
               Иванов Иван Иванович

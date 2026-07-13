@@ -15,7 +15,6 @@ import SubjectIcon from '@mui/icons-material/Subject';
 import PageTitle from '../../components/PageTitle';
 import BreadcrumbsNav from '../../components/Breadcrumbs';
 
-// Маленькая подпись над полем: текст + иконка справа (как на макете).
 const SectionLabel = ({ icon, children }) => (
   <Box sx={styles.label}>
     <Typography variant="body2">{children}</Typography>
@@ -23,7 +22,6 @@ const SectionLabel = ({ icon, children }) => (
   </Box>
 );
 
-// Все стили страницы в одном месте, чтобы разметка оставалась чистой.
 const styles = {
   page: { pb: 6, textAlign: 'left' },
   tabsBar: { borderBottom: 1, borderColor: 'divider', mt: 2 },
@@ -42,7 +40,7 @@ const styles = {
   label: { display: 'flex', alignItems: 'center', gap: 0.5, mb: 0.5, color: 'text.secondary' },
   labelIcon: { display: 'flex', color: 'primary.main' },
   slider: { color: 'primary.main' },
-  textField: { bgcolor: '#fff', borderRadius: 1 },
+  textField: { bgcolor: 'background.paper', borderRadius: 1 },
   saveRow: { display: 'flex', justifyContent: 'flex-end' },
   saveButton: {
     bgcolor: 'accent.main',
@@ -53,13 +51,11 @@ const styles = {
 };
 
 const Settings = () => {
-  // Состояние страницы. Всё контролируемое, чтобы поля реально работали.
-  const [tab, setTab] = useState(0); // активная вкладка
-  const [range, setRange] = useState(50); // значение ползунка "Диапазон"
+  const [tab, setTab] = useState(0);
+  const [range, setRange] = useState(50);
   const [levels, setLevels] = useState({ level1: true, level2: false, level3: false });
-  const [details, setDetails] = useState(''); // текст из поля "Подробности"
+  const [details, setDetails] = useState('');
 
-  // Переключение тумблеров "Согласование" по имени уровня.
   const handleLevel = (name) => (event) => {
     setLevels((prev) => ({ ...prev, [name]: event.target.checked }));
   };
@@ -70,7 +66,6 @@ const Settings = () => {
 
       <BreadcrumbsNav />
 
-      {/* Вкладки. Нижняя линия тянется на всю ширину, поэтому она на обёртке. */}
       <Box sx={styles.tabsBar}>
         <Tabs value={tab} onChange={(event, value) => setTab(value)} sx={styles.tabs}>
           <Tab label="Управление" />
@@ -79,10 +74,8 @@ const Settings = () => {
         </Tabs>
       </Box>
 
-      {/* Вкладка "Управление" — единственная, что заполнена контентом. */}
       {tab === 0 && (
         <Box sx={styles.panel}>
-          {/* Диапазон */}
           <Box>
             <SectionLabel icon={<ShowChartIcon fontSize="small" />}>Диапазон</SectionLabel>
             <Slider
@@ -99,7 +92,6 @@ const Settings = () => {
             />
           </Box>
 
-          {/* Согласование */}
           <Box>
             <SectionLabel icon={<CheckIcon fontSize="small" />}>Согласование</SectionLabel>
             <FormGroup>
@@ -118,7 +110,6 @@ const Settings = () => {
             </FormGroup>
           </Box>
 
-          {/* Подробности */}
           <Box>
             <SectionLabel icon={<SubjectIcon fontSize="small" />}>Подробности</SectionLabel>
             <TextField
@@ -132,7 +123,6 @@ const Settings = () => {
             />
           </Box>
 
-          {/* Кнопка "Сохранить" прижата вправо. */}
           <Box sx={styles.saveRow}>
             <Button variant="contained" sx={styles.saveButton}>
               Сохранить
